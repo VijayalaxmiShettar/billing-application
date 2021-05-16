@@ -1,0 +1,47 @@
+body{
+    background-color:rgb(228, 231, 235);
+    overflow: scroll;
+}
+
+.link-style {
+    text-decoration: none;
+    color:white;
+} 
+
+.cust-prod-container {
+    display: flex; 
+    justify-content: space-evenly;
+    height:500px;
+    margin: 60px;
+}
+
+.cust-prod-form-container{
+    height:300px;
+     width:30%;
+    border:1px solid rgb(209, 209, 203);
+    border-radius:6px;
+     display:flex; 
+     flex-direction: column; 
+     align-items:center;
+     background-color: white;
+}
+
+.form-class {
+    width: 100%;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    /*margin-top: 60px;*/
+}
+
+.table-class {
+    width: 60%;
+    background-color: rgb(247, 247, 228);
+    overflow: auto;
+}
+
+.thStyle {
+    background-color: rgb(60, 61, 74);
+    color: white;
+} 
+
