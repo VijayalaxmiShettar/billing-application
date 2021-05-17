@@ -63,10 +63,12 @@ const Home = (props)=>{
             return {...bill, custDetails}
         })
         setBills(updated.reverse())
-        getMonthlyData(Number(month))
         
+    }, [bills, customers])
+    
+    useEffect(()=>{
+         getMonthlyData(Number(month))
     }, [bills])
-
 
     const getTotalSales = ()=>{
         let total = 0
