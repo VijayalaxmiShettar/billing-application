@@ -40,7 +40,7 @@ const BillListing = (props)=>{
             return {...bill, custDetails:{...custRes}}
         })
         setBillDetails(res.reverse())
-    }, [bills])
+    }, [bills, customers])
 
     const handleDelete = (id) =>{
         dispatch(asyncDeleteBill(id, localStorage.getItem('pos-token'), handleSuccess))
