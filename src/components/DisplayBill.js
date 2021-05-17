@@ -63,7 +63,7 @@ const DisplayBill = (props)=>{
                     </thead>
                     <tbody>
                     {lineItems.map((item, i)=>{
-                                return <tr>
+                                return <tr key={item.product}>
                                     <td>{i+1}</td>
                                     <td>{item.prodName || item.name}</td>
                                     <td>{item.quantity}</td>
