@@ -12,7 +12,7 @@ export const asyncGenerateBill = (data, token, history)=>{
             .then((res)=>{
                 console.log('Bill Added', res.data)
                 dispatch(addBill(res.data))
-                history.push(`/billing/${res.data._id}`, {...res.data, ...data}) //data has more details like prod names in line items, and customer name and phone
+                history.push(`/billing/${res.data._id}`, {...res.data, ...data, generated:true}) //data has more details like prod names in line items, and customer name and phone
             })
             .catch((err)=>{
                 unauthorizedCheck(err, dispatch)
