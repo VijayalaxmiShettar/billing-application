@@ -6,16 +6,21 @@ import html2canvas from 'html2canvas'
 import '../styles/styles.css'
 import PrintIcon from '@material-ui/icons/Print';
 import {IconButton, Paper} from '@material-ui/core'
+import ErrorHandling from './ErrorHandling'
 
 const DisplayBill = (props)=>{
     
     const {lineItems, date, name, total, phone} = props.location.state
+    const [generated, setGenerated] = useState(props.location.state.generated || false)
     const adminDetails =useSelector((state)=>{
         return state.adminDetails
     })
     
     const handleCancel =()=>{
         props.history.push('/billing')
+    }
+    const handleGenerated = ()=>{
+        setGenerated(!generated)
     }
     const invoiceRef = useRef();
     const handleDownload = ()=> {
@@ -78,6 +83,7 @@ const DisplayBill = (props)=>{
                 </div>
             
             </Paper>
+            <ErrorHandling autoHideDuration={2000} vertical="top" horizontal="center" open={generated} success={true} handleNotification={handleGenerated} msg="Bill generated successfully"/>
             </div>   
     )
 }
