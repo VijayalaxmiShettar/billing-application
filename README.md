@@ -7,9 +7,9 @@ This application is an invoicing and inventory solution for small businesses. Th
 - React and Redux
 - axios, react-router-dom, redux-thunk, react-google-charts, react-select, validator, jspdf, html2canvas, material-ui, sweetalert
 
-------
+[Try Point of Sale App](https://my-invoicing-app.herokuapp.com/)
 
-[Try Point of Sale App]: https://my-invoicing-app.herokuapp.com/	"Try Point of Sale App"
+------
 
 #### Features
 
