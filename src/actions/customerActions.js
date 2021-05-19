@@ -6,13 +6,12 @@ import {unauthorizedCheck} from './unauthorizedCheck'
 
 export const getCustomers = (token)=>{
     return (dispatch)=>{
-        axios.get('http://dct-billing-app.herokuapp.com/api/customers', {
+        axios.get('https://dct-billing-app.herokuapp.com/api/customers', {
             headers:{
                 'Authorization' : `Bearer ${token}`
             }
         })
             .then((res)=>{
-                console.log(res.data)
                 dispatch(addCustomers(res.data))
             })
             .catch((err)=>{
@@ -31,21 +30,19 @@ export const addCustomers = (data)=>{
 
 export const asyncAddNewCustomer = (data, token, handleSuccess, billData, history, showBill) =>{
     return (dispatch)=>{
-        axios.post('http://dct-billing-app.herokuapp.com/api/customers', data, {
+        axios.post('https://dct-billing-app.herokuapp.com/api/customers', data, {
             headers:{
                 'Authorization': `Bearer ${token}`
             }
         })
             .then((res)=>{
-                console.log(res.data)
                 if(res.data.hasOwnProperty('errors')){
                     alert(res.data.message)
                 }else{
                     dispatch(addNewCustomer(res.data))
                     handleSuccess()
-                    console.log('errr', billData)
                     if(billData){
-                        //console.log('cust add action', history)
+                      
                         const finalBillData = {...billData, customer: res.data._id}
                         dispatch(asyncGenerateBill(finalBillData, token, history))
                     }
@@ -66,13 +63,12 @@ export const addNewCustomer = (data)=>{
 
 export const asyncDeleteCustomer = (id, token)=>{
     return (dispatch)=>{
-        axios.delete(`http://dct-billing-app.herokuapp.com/api/customers/${id}`, {
+        axios.delete(`https://dct-billing-app.herokuapp.com/api/customers/${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         })
             .then((res)=>{
-                console.log(res.data)
                 dispatch(deleteCustomer(id))
             })
             .catch((err)=>{
@@ -90,13 +86,12 @@ export const deleteCustomer = (id)=>{
 
 export const asyncUpdateCustomer = (data, id, token) =>{
     return (dispatch)=>{
-        axios.put(`http://dct-billing-app.herokuapp.com/api/customers/${id}`, data, {
+        axios.put(`https://dct-billing-app.herokuapp.com/api/customers/${id}`, data, {
             headers:{
                 'Authorization' : `Bearer ${token}`
             }
         })
             .then((res)=>{
-                console.log(res.data)
                 dispatch(updateCustomer(res.data))
             })
             .catch((err)=>{

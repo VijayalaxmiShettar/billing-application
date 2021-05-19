@@ -68,7 +68,6 @@ const Home = (props)=>{
         setBills(updated.reverse())
         
     }, [bills, customers])
-
     const getMonthlyData = (selectedMonth)=>{
         const monthlyData = {}
         for(let i=1;i<32;i++){

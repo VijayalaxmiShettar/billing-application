@@ -6,13 +6,12 @@ import {unauthorizedCheck} from './unauthorizedCheck'
 export const getProducts = (token)=>{
     return (dispatch)=>{
         //const token = localStorage.getItem('pos-token')
-        axios.get('http://dct-billing-app.herokuapp.com/api/products', {
+        axios.get('https://dct-billing-app.herokuapp.com/api/products', {
             headers:{
                 'Authorization' : `Bearer ${token}`
             }
         })
             .then((res)=>{
-                console.log(res.data)
                 dispatch(addProducts(res.data))
             })
             .catch((err)=>{
@@ -30,13 +29,12 @@ export const addProducts = (data) =>{
 
 export const asyncAddNewProd = (data, token, handleSuccess) =>{
     return (dispatch)=>{
-        axios.post('http://dct-billing-app.herokuapp.com/api/products', data, {
+        axios.post('https://dct-billing-app.herokuapp.com/api/products', data, {
             headers:{
                 'Authorization' : `Bearer ${token}`
             }
         })
             .then((res)=>{
-                console.log(res.data)
                 if(res.data.hasOwnProperty('errors')){
                     alert(res.data.message)
                 }else{
@@ -60,13 +58,12 @@ export const addNewProd = (data)=>{
 
 export const asyncDeleteProd = (id, token)=>{
     return (dispatch)=>{
-        axios.delete(`http://dct-billing-app.herokuapp.com/api/products/${id}`, {
+        axios.delete(`https://dct-billing-app.herokuapp.com/api/products/${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         })
             .then((res)=>{
-                console.log(res.data)
                 dispatch(deleteProd(id))
             })
             .catch((err)=>{
@@ -84,13 +81,12 @@ export const deleteProd = (id)=>{
 
 export const asyncUpdateProd = (data, id, token)=>{
     return (dispatch)=>{
-        axios.put(`http://dct-billing-app.herokuapp.com/api/products/${id}`, data, {
+        axios.put(`https://dct-billing-app.herokuapp.com/api/products/${id}`, data, {
             headers:{
                 'Authorization': `Bearer ${token}`
             }
         })
             .then((res)=>{
-                console.log(res.data)
                 dispatch(updateProd(res.data))
             })
             .catch((err)=>{

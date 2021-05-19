@@ -3,7 +3,7 @@ import axios from 'axios'
 export const asyncRegister = (data, history)=>{
     
     return (dispatch)=>{
-        axios.post('http://dct-billing-app.herokuapp.com/api/users/register', data)
+        axios.post('https://dct-billing-app.herokuapp.com/api/users/register', data)
             .then((res)=>{
                 console.log(res.data)
                 if(res.data.hasOwnProperty('errors')){
@@ -21,7 +21,7 @@ export const asyncRegister = (data, history)=>{
 }
 export const asyncLoginAdmin = (data, history, handleError)=>{
     return (dispatch)=>{
-        axios.post('http://dct-billing-app.herokuapp.com/api/users/login', data)
+        axios.post('https://dct-billing-app.herokuapp.com/api/users/login', data)
         .then((res)=>{
             console.log(res.data)
             if(res.data.hasOwnProperty('errors')){
@@ -50,7 +50,7 @@ export const setAdmin = (data) =>{
 
 export const getAdminDetails = (token)=>{
     return (dispatch)=>{
-        axios.get('http://dct-billing-app.herokuapp.com/api/users/account', {
+        axios.get('https://dct-billing-app.herokuapp.com/api/users/account', {
             headers:{
                 'Authorization': `Bearer ${token}`
             }

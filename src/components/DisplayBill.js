@@ -20,6 +20,9 @@ const DisplayBill = (props)=>{
     const handleGenerated = ()=>{
         setGenerated(!generated)
     }
+    // const handleGenerated = ()=>{
+    //     setGenerated(!generated)
+    // }
     const invoiceRef = useRef();
     
     const handleDownload = ()=>{
