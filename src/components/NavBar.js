@@ -1,10 +1,10 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import {Link, Route, Switch} from 'react-router-dom'
+import {Link, Route, Switch, withRouter} from 'react-router-dom'
 import {IconButton, Menu, MenuItem, AppBar, Toolbar, Typography, Button,Tooltip} from '@material-ui/core/';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { makeStyles } from '@material-ui/core/styles';
-import { setAdmin } from '../actions/adminActions'
+import { setAdmin, getAdminDetails } from '../actions/adminActions'
 import BillingContainer from './BillingContainer'
 import '../styles/styles.css'
 import Customer from './Customer'
@@ -35,10 +35,11 @@ const NavBar = (props)=>{
     const adminDetails = useSelector((state)=>{
         return state.adminDetails
     })
-
+    
     const handleLogout = ()=>{
         dispatch(setAdmin({auth: false}))
         localStorage.removeItem('pos-token')
+        props.history.push('/')
         setAnchorEl(null);
     }
 
@@ -111,4 +112,4 @@ const NavBar = (props)=>{
     )
 }
 
-export default NavBar
+export default withRouter(NavBar)

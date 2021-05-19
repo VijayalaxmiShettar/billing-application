@@ -9,7 +9,6 @@ export const asyncRegister = (data, history)=>{
                 if(res.data.hasOwnProperty('errors')){
                     alert(res.data.message)
                 }else{
-                    alert('Registration successful')
                     history.push('/login', {from: '/register'})
                 }
                 

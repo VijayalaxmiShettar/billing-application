@@ -1,17 +1,19 @@
 import React, {useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
+import {withRouter} from 'react-router-dom'
 import { TableRow, TableCell, Button, IconButton } from '@material-ui/core'
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 import {asyncDeleteCustomer } from '../actions/customerActions'
 import {asyncDeleteProd } from '../actions/productActions'
 import EditProduct from './EditProduct'
-
+import BillListing from './BillListing';
 
 const CustProdItem = (props)=>{
 
     const {_id, name, mobile, email, price} =props
     const [editToggle, setEditToggle] = useState(false)
+    const [showToggle, setShowToggle] = useState(false)
     const dispatch = useDispatch()
 
     const handleDelete = (id)=>{
@@ -23,6 +25,9 @@ const CustProdItem = (props)=>{
     }
     const handleEdit = ()=>{
         setEditToggle(!editToggle)
+    }
+    const handleView = ()=>{
+        setShowToggle(!showToggle)
     }
     return(
         <TableRow>
@@ -36,6 +41,7 @@ const CustProdItem = (props)=>{
                     <TableCell size="small">{name}</TableCell>
                     <TableCell size="small">{mobile}</TableCell>
                     <TableCell size="small">{email || '-'}</TableCell>
+                    <TableCell size="small"><Button size="small" onClick={handleView}>View</Button></TableCell>
                 </>
             )}
             
@@ -50,8 +56,9 @@ const CustProdItem = (props)=>{
                 </IconButton>
             </TableCell>
             <EditProduct _id={_id} name={name} mobile={mobile} email={email} price={price} handleEdit={handleEdit} editToggle={editToggle}/>
+            <BillListing showToggle={showToggle} handleView={handleView} id={_id} name={name} mobile={mobile} />
         </TableRow>
     )   
 }
 
-export default CustProdItem
+export default withRouter(CustProdItem)

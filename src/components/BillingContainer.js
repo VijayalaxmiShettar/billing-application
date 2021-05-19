@@ -1,17 +1,17 @@
 import React, {useState, useEffect} from 'react'
 import {withRouter} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
-import { asyncGenerateBill, getBills } from '../actions/billActions'
-import { asyncAddNewCustomer, getCustomers } from '../actions/customerActions'
-import {getAdminDetails} from '../actions/adminActions'
-import LineItem from './LineItem'
-import AddCustomerDialog from './AddCustomerDialog'
+import validator from 'validator'
 import {Table, TableBody, TableCell, TableRow, TableHead, Button, TextField, Grid, Divider} from '@material-ui/core/';
 import Heading from './Heading'
 import { getProducts } from '../actions/productActions'
 import ErrorHandling from './ErrorHandling'
-import validator from 'validator'
 import BillListing from './BillListing'
+import LineItem from './LineItem'
+import AddCustomerDialog from './AddCustomerDialog'
+import { asyncGenerateBill, getBills } from '../actions/billActions'
+import { asyncAddNewCustomer, getCustomers } from '../actions/customerActions'
+import {getAdminDetails} from '../actions/adminActions'
 
 const BillingContainer = (props)=>{
     const [phone, setPhone] = useState('')
@@ -32,13 +32,14 @@ const BillingContainer = (props)=>{
     const handleError = () =>{
         setError(!error)
     }
+    
     useEffect(()=>{
         const token = localStorage.getItem('pos-token')
         dispatch(getAdminDetails(token))
         if(customers.length == 0){
             dispatch(getCustomers(token))
-        }else if(products.length ==0){
-            //console.log('zerooo')
+        }
+        if(products.length ==0){
             dispatch(getProducts(token))
         }
     }, [])
@@ -49,6 +50,7 @@ const BillingContainer = (props)=>{
         })
         setOptions(optionsArr)
     }, [products])
+
     const handleItemChange = (id, data)=>{
         const res = items.map((item)=>{
             if(item.id === id){
@@ -64,9 +66,11 @@ const BillingContainer = (props)=>{
         const res = [...items, {id: Number(new Date()), prodName:'', product:'', quantity:1, price:''}]
         setItems(res)
     }
+
     const toggleCustNotPresent = ()=>{
         setNotPresent(!custNotPresent)
     }
+
     const handleSubmit = (e)=>{
         e.preventDefault()
         const token = localStorage.getItem('pos-token')
@@ -87,8 +91,6 @@ const BillingContainer = (props)=>{
                     name : res.name,
                     phone
                 }
-                console.log('++++++++++++++', props)
-                console.log('+++++++++++++', props.props)
                 dispatch(asyncGenerateBill(data, token, props.history)) //console.log('Data sent for bill creation - Existing customer', data)
             }else{
                 toggleCustNotPresent()
@@ -96,10 +98,9 @@ const BillingContainer = (props)=>{
                     date: new Date(),
                     lineItems: items,
                 }
-                setBillInfo(billData) //dispatch(asyncAddNewCustomer(data, token, billData, showBill))
+                setBillInfo(billData) 
             }
         }
-        
     }
     
     const handleChange = (e)=>{

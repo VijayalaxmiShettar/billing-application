@@ -22,7 +22,7 @@ const Product = (props)=>{
     
     const [prodResults, setProdResults] = useState(products)
 
-    useEffect(()=>{
+    useEffect(()=>{ 
         if(products.length == 0){
             dispatch(getProducts(localStorage.getItem('pos-token')))
         }
@@ -37,12 +37,12 @@ const Product = (props)=>{
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
-      };
+    };
     
-      const handleChangeRowsPerPage = (event) => {
+    const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);
         setPage(0);
-      };
+    };
     return(
         <div className="cust-prod-container">
             <div className="cust-prod-form-container">
@@ -74,6 +74,7 @@ const Product = (props)=>{
                         </TableBody>
                     </Table>
                 </TableContainer>
+                {prodResults.length > 10 && 
                 <TablePagination
                     rowsPerPageOptions={[10, 25, 50]}
                     count={prodResults.length}
@@ -81,9 +82,9 @@ const Product = (props)=>{
                     page={page}
                     onChangePage={handleChangePage}
                     onChangeRowsPerPage={handleChangeRowsPerPage}
-            /><br/>
+            />}<br/>
             
-            {products.length == 0 && <Heading variant="h6" title="No products found, add your first product"/>}
+            {products.length == 0 && <div className="noItemsClass"><Heading variant="h5" title="No products found, add your first product"/></div>}
             
             </Paper>
         </div>

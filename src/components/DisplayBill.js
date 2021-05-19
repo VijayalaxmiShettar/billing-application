@@ -3,27 +3,30 @@ import {withRouter} from 'react-router-dom'
 import {useSelector} from 'react-redux'
 import {jsPDF} from 'jspdf'
 import html2canvas from 'html2canvas'
+import { useReactToPrint } from 'react-to-print';
 import '../styles/styles.css'
 import PrintIcon from '@material-ui/icons/Print';
 import {IconButton, Paper} from '@material-ui/core'
+import ErrorHandling from './ErrorHandling'
 
 const DisplayBill = (props)=>{
     
     const {lineItems, date, name, total, phone} = props.location.state
+    const [generated, setGenerated] = useState(props.location.state.generated || false)
     const adminDetails =useSelector((state)=>{
         return state.adminDetails
     })
     
-    const handleCancel =()=>{
-        props.history.push('/billing')
+    const handleGenerated = ()=>{
+        setGenerated(!generated)
     }
     const invoiceRef = useRef();
-    const handleDownload = ()=> {
+    
+    const handleDownload = ()=>{
     
         html2canvas(invoiceRef.current)
             .then((canvas) => {
                 const imgData = canvas.toDataURL('image/png');
-                // console.log(canvas.height)
                 const pdf = new jsPDF();
                 pdf.addImage(imgData, 'PNG', 0, 0);
                 pdf.save("invoice.pdf");  
@@ -32,7 +35,7 @@ const DisplayBill = (props)=>{
     
     return (
         <div ref={invoiceRef}>
-            <Paper  style={{width:'60%', minHeight:'500px', marginTop:'60px', padding:'20px'}}>
+            <Paper  style={{width:'60%', height:'100vh', marginTop:'60px', padding:'20px'}}>
             
                 <IconButton size="small" onClick={handleDownload}>
                     <PrintIcon/>
@@ -63,9 +66,9 @@ const DisplayBill = (props)=>{
                     </thead>
                     <tbody>
                     {lineItems.map((item, i)=>{
-                                return <tr>
+                                return <tr key={item.product}>
                                     <td>{i+1}</td>
-                                    <td>{item.prodName || item.name}</td>
+                                    <td>{item.prodDetails?.name || item.prodName || item.name}</td>
                                     <td>{item.quantity}</td>
                                     <td>{item.price}</td>
                                     <td>{(item.price * item.quantity).toLocaleString()}</td>
@@ -78,6 +81,7 @@ const DisplayBill = (props)=>{
                 </div>
             
             </Paper>
+            <ErrorHandling autoHideDuration={2000} vertical="top" horizontal="center" open={generated} success={true} handleNotification={handleGenerated} msg="Bill generated successfully"/>
             </div>   
     )
 }

@@ -12,8 +12,8 @@ import ErrorHandling from './ErrorHandling'
 
 const Login = (props)=>{
     const [emailIncorrect, setEmailIncorrect] = useState(false)
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState(props.location.state?.email || '')
+    const [password, setPassword] = useState(props.location.state?.password || '')
     const [showPwd, setShowPwd] = useState(false)
     const [error, setError] = useState(false)
     const [success, setSuccess] = useState(false)
