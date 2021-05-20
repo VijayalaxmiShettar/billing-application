@@ -11,7 +11,7 @@ export const theme = createMuiTheme({
 
  export const useStyles = makeStyles((theme) => ({
       cellStyle: {
-          backgroundColor:'rgb(97, 97, 95)',
+          backgroundColor:'rgb(194, 103, 17)',
           color:'white',
           fontWeight:'bold',
           padding:'none'

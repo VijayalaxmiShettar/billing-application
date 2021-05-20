@@ -16,13 +16,14 @@ import Account from './Account'
 import NotFound from './NotFound'
 import DisplayBill from './DisplayBill'
 import ProtectedRoute from './ProtectedRoute'
+import Heading from './Heading';
 
 const useStyles = makeStyles((theme) => ({
     title: {
       flexGrow: 1,
     },
     toolbarStyle: {
-        backgroundColor: 'black',
+        backgroundColor: 'rgb(140, 14, 14)',
     },
   }));
 
@@ -57,14 +58,14 @@ const NavBar = (props)=>{
                 <Toolbar className={classes.toolbarStyle} variant="dense" >
                     <Typography variant="h6" className={classes.title}>
                         <Tooltip title="Dashboard">
-                        <Link className="link-style" to="/">Billing App</Link>
+                        <Link className="link-style" to="/">Point of Sale</Link>
                         </Tooltip>
                     </Typography>
                     {adminDetails.auth ? (
                         <div>
-                            <Button size="small" color="inherit"><Link className="link-style" to="/products">Products</Link></Button>
-                            <Button size="small" color="inherit"><Link className="link-style" to="/customers">Customers</Link></Button>
-                            <Button size="small" color="inherit"><Link className="link-style" to="/billing">Billing</Link></Button>
+                            <Button size="small" color="inherit"><Link className="link-style" to="/products"><Heading variant="subtitle1" title="Products"/></Link></Button>
+                            <Button size="small" color="inherit"><Link className="link-style" to="/customers"><Heading variant="subtitle1" title="Customers"/></Link></Button>
+                            <Button size="small" color="inherit"><Link className="link-style" to="/billing"><Heading variant="subtitle1" title="Billing"/></Link></Button>
                             <IconButton
                                 aria-controls="menu-appbar"
                                 aria-haspopup="true"

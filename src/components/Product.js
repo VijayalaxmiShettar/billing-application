@@ -82,7 +82,7 @@ const Product = (props)=>{
                     page={page}
                     onChangePage={handleChangePage}
                     onChangeRowsPerPage={handleChangeRowsPerPage}
-            />}<br/>
+            />}
             
             {products.length == 0 && <div className="noItemsClass"><Heading variant="h5" title="No products found, add your first product"/></div>}
             
