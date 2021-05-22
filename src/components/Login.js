@@ -20,6 +20,8 @@ const Login = (props)=>{
     const dispatch = useDispatch()
     const from = props.location.state?.from 
 
+    const inputStyle = { WebkitBoxShadow: "0 0 0 1000px white inset" };
+
     useEffect(()=>{
         if(from == '/register'){
             handleSuccess()
@@ -65,7 +67,7 @@ const Login = (props)=>{
             <form onSubmit={handleSubmit} style={{ height:'250px', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'space-evenly'}}>
                 <Grid container spacing={2} alignItems="flex-end">
                     <Grid item>
-                        <TextField onBlur={handleEmailBlur} helperText={emailIncorrect && "Enter a valid email"}error={emailIncorrect} required style={{width:'300px'}} name="email" value={email} onChange={handleChange} size="small" label="Email"
+                        <TextField onBlur={handleEmailBlur} helperText={emailIncorrect && "Enter a valid email"}error={emailIncorrect} required inputProps={{ style: inputStyle }} style={{width:'300px'}} name="email" value={email} onChange={handleChange} size="small" label="Email"
                         InputProps={{
                             startAdornment: (
                               <InputAdornment position="start">
@@ -79,7 +81,7 @@ const Login = (props)=>{
                 <Grid container spacing={2} alignItems="flex-end">
                     
                     <Grid item>
-                        <TextField required style={{width:'300px'}} type={showPwd ? 'text' : 'password'} name="password" value={password} onChange={handleChange} size="small" label="Password"
+                        <TextField required inputProps={{ style: inputStyle }} style={{width:'300px'}} type={showPwd ? 'text' : 'password'} name="password" value={password} onChange={handleChange} size="small" label="Password"
                         InputProps={{
                             startAdornment: (
                               <InputAdornment position="start">

@@ -5,6 +5,9 @@ import {IconButton, Menu, MenuItem, AppBar, Toolbar, Typography, Button,Tooltip}
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { makeStyles } from '@material-ui/core/styles';
 import { setAdmin, getAdminDetails } from '../actions/adminActions'
+import {addCustomers} from '../actions/customerActions'
+import {addProducts} from '../actions/productActions'
+import {setBills} from '../actions/billActions'
 import BillingContainer from './BillingContainer'
 import '../styles/styles.css'
 import Customer from './Customer'
@@ -40,6 +43,9 @@ const NavBar = (props)=>{
     const handleLogout = ()=>{
         dispatch(setAdmin({auth: false}))
         localStorage.removeItem('pos-token')
+        dispatch(addProducts([]))
+        dispatch(addCustomers([]))
+        dispatch(setBills([]))
         props.history.push('/')
         setAnchorEl(null);
     }

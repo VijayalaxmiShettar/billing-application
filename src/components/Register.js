@@ -21,6 +21,8 @@ const Register = (props)=>{
     const [showPwd, setShowPwd] = useState(false)
     const [data, setData] = useState({username:'', email:'', password:'', businessName:'', address:''})
 
+    const inputStyle = { WebkitBoxShadow: "0 0 0 1000px white inset" };
+
     const handleChange = (e) =>{
         const value = e.target.value
         const name = e.target.name
@@ -52,7 +54,7 @@ const Register = (props)=>{
         <div className="form-class" style={{marginTop:'60px'}}>
             <Heading title="REGISTER"/>
             <form onSubmit={handleSubmit} className="form-class">
-                <TextField required style={{width:'40%'}} name="username" value={data.username} onChange={handleChange} error={usernameIncorrect} helperText="Minimum 4 characters" size="small" label="Username"
+                <TextField required inputProps={{ style: inputStyle }} style={{width:'40%'}} name="username" value={data.username} onChange={handleChange} error={usernameIncorrect} helperText="Minimum 4 characters" size="small" label="Username"
                 InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -62,7 +64,7 @@ const Register = (props)=>{
                   }}
                 /><br/>
                 
-                <TextField helperText={emailIncorrect && "Enter a valid email"} error={emailIncorrect} required style={{width:'40%'}} name="email" value={data.email} onChange={handleChange} size="small" label="Email"
+                <TextField helperText={emailIncorrect && "Enter a valid email"} error={emailIncorrect} required inputProps={{ style: inputStyle }} style={{width:'40%'}} name="email" value={data.email} onChange={handleChange} size="small" label="Email"
                         InputProps={{
                             startAdornment: (
                               <InputAdornment position="start">
@@ -72,7 +74,7 @@ const Register = (props)=>{
                           }}
                         /><br/>
 
-                <TextField required style={{width:'40%'}} type={showPwd ? "text" : "password"} name="password" value={data.password} onChange={handleChange} error={pwdIncorrect} helperText="Minimum 8 characters" size="small" label="Password"
+                <TextField required inputProps={{ style: inputStyle }} style={{width:'40%'}} type={showPwd ? "text" : "password"} name="password" value={data.password} onChange={handleChange} error={pwdIncorrect} helperText="Minimum 8 characters" size="small" label="Password"
                 InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -89,7 +91,7 @@ const Register = (props)=>{
                   }}
                 /><br/>
                 
-                <TextField required style={{width:'40%'}} name="businessName" value={data.businessName} onChange={handleChange} size="small" label="Business Name"
+                <TextField required inputProps={{ style: inputStyle }} style={{width:'40%'}} name="businessName" value={data.businessName} onChange={handleChange} size="small" label="Business Name"
                 InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -99,7 +101,7 @@ const Register = (props)=>{
                   }}
                 /><br/>
                 
-                <TextField style={{width:'40%'}} multiline={true} rows="3" label="Address" value={data.address} name="address" onChange={handleChange} size="small"
+                <TextField inputProps={{ style: inputStyle }} style={{width:'40%'}} multiline={true} rows="3" label="Address" value={data.address} name="address" onChange={handleChange} size="small"
                 InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">

@@ -26,6 +26,7 @@ const Home = (props)=>{
     const [latestBills, setBills] = useState([])
     const [month, setMonth] = useState(new Date().getMonth().toString())
     const [chartData, setChartData] = useState([])
+    const [top5, setTop5] = useState([])
     const [topProdList, setTopList] = useState([])
     //const [prodSold, setProdSold] = useState({})
     const dispatch = useDispatch()
@@ -48,11 +49,17 @@ const Home = (props)=>{
     useEffect(()=>{
         const token = localStorage.getItem('pos-token')
         console.log("GETTING DATA HOME..")
-        if(token){ //********** && products.length==0 && customers.length==0 && bills.length == 0*/
+        if(token){ 
             dispatch(getAdminDetails(token))
-            dispatch(getProducts(token))
-            dispatch(getCustomers(token))
-            dispatch(getBills(token))
+            if(products.length == 0){
+                dispatch(getProducts(token))
+            }
+            if(customers.length == 0){
+                dispatch(getCustomers(token))
+            }
+            if(bills.length == 0){
+                dispatch(getBills(token))
+            }
         }
     },[])
 
@@ -68,6 +75,7 @@ const Home = (props)=>{
         setBills(updated.reverse())
         
     }, [bills, customers])
+
     const getMonthlyData = (selectedMonth)=>{
         const monthlyData = {}
         for(let i=1;i<32;i++){
@@ -103,15 +111,18 @@ const Home = (props)=>{
             return y[1] - x[1]
         })
         const topProducts = sortedList.slice(0, 5)
-        
-        const topList = topProducts.map((prod)=>{
+        setTop5(topProducts)
+    }, [bills])
+
+    useEffect(()=>{
+        const topList = top5.map((prod)=>{
             const resProd= products.find((p)=>{
                 return p._id == prod[0]
             })
             return [resProd?.name, prod[1]]
         })
         setTopList(topList)
-    }, [bills])
+    }, [top5, products])
 
     const getTotalSales = ()=>{
         let total = 0
