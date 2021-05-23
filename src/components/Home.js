@@ -10,6 +10,7 @@ import ShowLatestBills from './ShowLatestBills'
 import { Paper, Typography, Select, MenuItem, Button, Grid, List, CircularProgress } from '@material-ui/core'
 import '../styles/styles.css'
 import { makeStyles } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 import Heading from './Heading'
 
 const useStyles = makeStyles((theme) => ({
@@ -17,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
         padding:'5px',
         height:'40px',
         minWidth:'20%'
-        //backgroundColor:'rgb(247, 161, 161)'
     },
   }));
 
@@ -28,7 +28,8 @@ const Home = (props)=>{
     const [chartData, setChartData] = useState([])
     const [top5, setTop5] = useState([])
     const [topProdList, setTopList] = useState([])
-    //const [prodSold, setProdSold] = useState({})
+    const matches = useMediaQuery('(min-width:600px)');
+
     const dispatch = useDispatch()
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
@@ -147,8 +148,8 @@ const Home = (props)=>{
                 (<>
                 <Heading title="Dashboard"/>
                 <Grid container spacing={3}>
-                    <Grid container xs={7} direction="column">
-                        <Grid item style={{marginTop:'10px', display:'flex', flexDirection:'row', justifyContent:'space-evenly'}}>
+                    <Grid container xs={matches ? 7 : 10} direction="column">
+                        <Grid item style={{marginTop:'10px', display:'flex', flexDirection: matches ? 'row' : 'column', justifyContent:'space-evenly'}}>
                             <Paper className={classes.paperStyles}><Typography variant="subtitle1">{`Total Products : ${products.length}`}</Typography></Paper>
 
                             <Paper className={classes.paperStyles}><Typography variant="subtitle1">{`Total Customers : ${customers.length}`}</Typography></Paper>
@@ -190,7 +191,7 @@ const Home = (props)=>{
                         </Grid>
                     </Grid>
                     
-                    <Grid item xs={4} >
+                    <Grid item xs={matches ? 4 : 10} >
                     <Heading title="Last five bills"/>
                         <Paper style={{minHeight:'100px', backgroundColor:'rgb(247, 242, 82)', marginBottom:'10px'}}>
                             {latestBills.length == 0 ? <div style={{minHeight:'inherit', display:'flex', justifyContent:'center', alignItems:'center'}}><Heading variant="h6" title="No bills"/></div> : (
