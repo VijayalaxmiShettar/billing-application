@@ -225,10 +225,11 @@ const Home = (props)=>{
                 </Grid></>) : (
                 <>
                 <div style={{display:'flex', justifyContent:'space-evenly'}}>
+                    {matches && 
                     <div style={{width:'60%'}}>
                         <img src="https://www.softwaresuggest.com/blog/wp-content/uploads/2019/01/invoice_billing_feature_FB_image.png" height="450px" width="100%"/>
-                    </div>
-                    <div style={{width:'30%', height:'450px', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center'}}>
+                    </div>}
+                    <div style={{width:matches ? '30%' : '80%', height:'450px', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center'}}>
                         <Heading title="Welcome to our online invoicing and inventory solution"/><br/>
                             <div style={{display:'flex'}}>
                                 <Button size="small" color="primary" variant="contained"><Link className="link-style" to="/register">Get Started</Link></Button> &nbsp; &nbsp;
