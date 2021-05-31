@@ -9,6 +9,10 @@ This application is an invoicing and inventory solution for small businesses. Th
 
 [Try Point of Sale App](https://my-invoicing-app.herokuapp.com/)
 
+**Demo**
+
+![image-20210531182035979](C:\Users\Vijaylaxmi\Documents\Captura\projDemo.gif)
+
 ------
 
 #### Features
