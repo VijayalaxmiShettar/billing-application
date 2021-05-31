@@ -11,7 +11,7 @@ This application is an invoicing and inventory solution for small businesses. Th
 
 **Demo**
 
-![image-20210531182035979](C:\Users\Vijaylaxmi\Documents\Captura\projDemo.gif)
+![image-20210531182035979](./projDemo.gif)
 
 ------
 
